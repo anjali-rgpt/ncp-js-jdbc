@@ -1,0 +1,14 @@
+.hide{
+    display:none;
+}
+
+form{
+    width:40%;
+}
+input{
+    border:1px solid black;
+    margin:0.2em;
+}
+
+
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registration</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+        function validate(){
+            firstName=document.getElementById('fname').value;
+            middleName=document.getElementById('mname').value;
+            lastName=document.getElementById('lname').value;
+
+            nameregex=/^[A-Z][a-z]+$/
+
+            if((!nameregex.test(firstName)) || (middleName=="") || ((middleName!="") && (!nameregex.test(middleName))) || (!nameregex.test(lastName))){
+                return 0;
+            }
+            console.log("Names checked");
+
+            zipval=document.getElementById('zipcode').value;
+            if((zipval.toString().length!=6) ||(zipval.toString().includes(/^[A-Za-z]+$/)) ){
+                console.log('Bad zipcode');
+                return 0;
+            }
+
+            console.log('Zip Code checked.')
+            
+            domain=document.getElementById('domain').value;
+            emailregex=/^[a-z]+[[.][a-z]+]+$/
+
+            if (!emailregex.text(domain)){
+                console.log("Bad email");
+                return 0;
+            }
+            
+            console.log('Email checked');
+
+            tenmarks=document.getElementById('marks10').value;
+            twelvemarks=document.getElementById('marks12').value;
+
+            if((tenmarks>100) || tenmarks<0 || twelvemarks>100 || twelvemarks <0){
+                console.log('Invalid marks');
+                return 0;
+            }
+
+            console.log('Marks checked');
+            return 1;
+
+
+        }
+
+        function generate(){
+            firstName=document.getElementById('fname');
+            middleName=document.getElementById('mname');
+            lastName=document.getElementById('lname');
+
+            tenmarks=document.getElementById('marks10');
+            twelvemarks=document.getElementById('marks12');
+
+            document.write(firstName);
+            document.write(lastName);
+            document.write(document.getElementById('permaddress'));
+            if (document.getElementById('checksame').checked){
+                document.write(document.getElementById('commaddress'));
+            }
+
+
+        }
+
+       
+        function submitornot(){
+            if (validate()==0){
+                event.preventDefault();
+            }
+
+            else{
+                generate();
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="http://www.google.com" method="POST" onsubmit="submitornot()">
+        <section id="name" class="main">
+            <h4>Student Name</h4>
+            <div class="column">
+                <label for="fname">First Name<span>*</span></label><br/>
+                <input type="text" name="fname" id="fname" required/>
+            </div>
+            <div class="column">
+                <label for="mname">Middle Name</label><br/>
+                <input type="text" name="mname" id="mname"/>
+            </div>
+            <div class="column">
+                <label for="lname">Last Name<span>*</span></label><br/>
+                <input type="text" name="lname" id="lname" required/>
+            </div>
+        </section>
+        <section id="permaddress" class="main">
+            <div class="row">
+                <label for="house">House number and name<span>*</span></label><br/>
+                <input type="text" name="house" id="house" required/>
+            </div>
+            <div class="row">
+                <label for="street">Street number and name<span>*</span></label><br/>
+                <input type="text" name="street" id="street" required/>
+            </div>
+            <div class="row">
+                <label for="locality">Locality<span>*</span></label><br/>
+                <input type="text" name="locality" id="locality" required/>
+            </div>
+            <div class="row">
+                <label for="state">State<span>*</span></label><br/>
+                <input type="text" name="state" id="state" required/>
+            </div>
+            <div class="row">
+                <label for="country">Country<span>*</span></label><br/>
+                <select name="country" id="country" required>
+                    <option value="--" selected>--</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="India">India</option>
+                    <option value="UAE">UAE</option>
+                    <option value="UK">UK</option>
+                    <option value="USA">USA</option>
+                </select>
+                
+            </div>
+            <div class="row">
+                <label for="zipcode">Zipcode<span>*</span></label><br/>
+                <input type="number" name="zipcode" id="zipcode" required/>
+            </div>
+        </section>
+        <section class="main">
+            <label for="checksame">Check if Permanent and Comm addresses are the same</label>
+            <input type="checkbox" id="checksame" name="checksame"/>
+        </section>
+        <section id="commaddress" class="main">
+            <div class="row">
+                <label for="chouse">House number and name<span>*</span></label><br/>
+                <input type="text" name="chouse" id="chouse" required/>
+            </div>
+            <div class="row">
+                <label for="cstreet">Street number and name<span>*</span></label><br/>
+                <input type="text" name="cstreet" id="cstreet" required/>
+            </div>
+            <div class="row">
+                <label for="clocality">Locality<span>*</span></label><br/>
+                <input type="text" name="clocality" id="clocality" required/>
+            </div>
+            <div class="row">
+                <label for="cstate">State<span>*</span></label><br/>
+                <input type="text" name="cstate" id="cstate" required/>
+            </div>
+            <div class="row">
+                <label for="ccountry">Country<span>*</span></label><br/>
+                <select name="ccountry" id="ccountry" required>
+                    <option value="--" selected>--</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="India">India</option>
+                    <option value="UAE">UAE</option>
+                    <option value="UK">UK</option>
+                    <option value="USA">USA</option>
+                </select>
+                
+            </div>
+            <div class="row">
+                <label for="czipcode">Zipcode<span>*</span></label><br/>
+                <input type="number" name="czipcode" id="czipcode" required/>
+            </div>
+        </section>
+        <section id="pname" class="main">
+            <h4>Parent Name</h4>
+            <div class="column">
+                <label for="pfname">First Name<span>*</span></label><br/>
+                <input type="text" name="pfname" id="pfname" required/>
+            </div>
+            <div class="column">
+                <label for="pmname">Middle Name</label><br/>
+                <input type="text" name="pmname" id="pmname"/>
+            </div>
+            <div class="column">
+                <label for="plname">Last Name<span>*</span></label><br/>
+                <input type="text" name="plname" id="plname" required/>
+            </div>
+        </section>
+        <section id="pemail" class="main">
+            <h4>Parent email<span>*</span></h4>
+             <input type="text" name="userid" id="userid" required/>@
+             <input type="text" name="domain" id="domain" required/>
+        </section>
+        <section id="edqual" class="main">
+            <label for="listofschools">List of schools studied at<span>*</span></label><br/>
+            <textarea name="listofschools" id="listofschools" required></textarea>
+        </section>
+        <section id="school" class="main">
+            <div class="row">
+                <h4>10th Qualification</h4>
+                <div class="column">
+                    <label for="schoolname10">School Name<span>*</span></label><br/>
+                    <input type="text" id="schoolname10" name="schoolname10" required/>
+                </div>
+                <div class="column">
+                    <label for="regnum10">Registration Number<span>*</span></label><br/>
+                    <input type="text" id="regnum10" name="regnum10" required/>
+                </div>
+                <div class="column">
+                    <label for="regnum10">10th Score in %<span>*</span></label><br/>
+                    <input type="number" id="marks10" name="marks10" required/>
+                </div>
+            </div>
+            <div class="row">
+                <h4>12th Qualification</h4>
+                <div class="column">
+                    <label for="schoolname12">School Name<span>*</span></label><br/>
+                    <input type="text" id="schoolname12" name="schoolname12" required/>
+                </div>
+                <div class="column">
+                    <label for="regnum12">Registration Number<span>*</span></label><br/>
+                    <input type="text" id="regnum12" name="regnum12" required/>
+                </div>
+                <div class="column">
+                    <label for="regnum12">12th Score in %<span>*</span></label><br/>
+                    <input type="number" id="marks12" name="marks12" required/>
+                </div>
+            </div>
+        </section>
+        <section id="agefield" class="main">
+            <label for="agegroup">Age Group<span>*</span></label><br/>
+            <select name="agegroup" id="agegroup" required>
+                <option value="minor">&lt;18</option>
+                <option value="correct">18 to 22</option>
+                <option value="over">22+</option>
+            </select>
+        </section>
+        <section id="guardian" class="hide">
+            <label for="guardian">Guardian</label><br/>
+            <input type="text" id="guardian" name="guardian"/><br/>
+        </section>
+        <section id="gender" class="main">
+            <h4>Gender<span>*</span></h4>
+            <label for="male"> Male</label>
+            <input type="radio" name="sgen" id="male" value="Male"/>
+            <label for="female"> Female</label>
+            <input type="radio" name="sgen" id="female" value="Female"/>
+            <label for="other"> Other</label>
+            <input type="radio" name="sgen" id="other" value="Other"/>
+        </section>
+        <section id="buttons" class="main">
+            <input type="submit" name="submit" value="submit">
+        </section>
+    </form>
+</body>
+</html>
